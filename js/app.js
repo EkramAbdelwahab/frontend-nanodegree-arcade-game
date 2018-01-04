@@ -251,20 +251,20 @@ gameObj.prototype.getY = function() {
 };
 
 
-var Character = function() {
+var gameChar = function() {
 	gameObj.call(this);
 };
 
 
-Character.prototype = Object.create(gameObj.prototype);
-Character.prototype.constructor = Character;
+gameChar.prototype = Object.create(gameObj.prototype);
+gameChar.prototype.constructor = gameChar;
 
-Character.prototype.render = function() {
+gameChar.prototype.render = function() {
 	
 	ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Character.prototype.getX = function() {
+gameChar.prototype.getX = function() {
 	var number = 0;
 	switch(app.randomNum()) {
 		case 0:
@@ -282,21 +282,21 @@ Character.prototype.getX = function() {
 
 
 //get speed function
-Character.prototype.getSpeed = function() {
+gameChar.prototype.getSpeed = function() {
 	return Math.floor(Math.random() * (app.maxSpeed - 100 + 1)) + 100;
 };
 
 
 // Enemies our player must avoid
 var Enemy = function() {
-    Character.call(this);
+    gameChar.call(this);
 	this.x = this.getX();
 	this.y = this.getY();
 	this.speed = this.getSpeed();
     this.sprite = 'images/enemy-bug.png';
 };
 
-Enemy.prototype = Object.create(Character.prototype);
+Enemy.prototype = Object.create(gameChar.prototype);
 Enemy.prototype.constructor = Enemy;
 
 // Update the enemy's position, required method for game
@@ -314,7 +314,7 @@ Enemy.prototype.update = function(dt) {
 
 //player
 var Player = function() {
-	Character.call(this);
+	gameChar.call(this);
 	//x and y position for the player
 	this.playerXPos = 404;
 	this.playerYPos = 390;
@@ -334,7 +334,7 @@ var Player = function() {
 	
 };
 
-Player.prototype = Object.create(Character.prototype);
+Player.prototype = Object.create(gameChar.prototype);
 Player.prototype.constructor = Player;
 
 //player area to play
